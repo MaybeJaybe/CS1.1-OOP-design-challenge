@@ -39,24 +39,27 @@ class Deck():
     def deal(self):
         hand = random.sample(self.cards, 8)
         # instead of 8 use draw parameter then when u call draw enter amount?
-        for card in hand:
-            card.show()
+        # for card in hand:
+        #     card.show()
+        return hand
 
     def drawCard(self):
         return self.cards.pop()
 
 # Player class and its the one holding the hand, can play game.
 # game class? need 4 classes
-class Player(Deck, Card):
+class Player():
     def __init__(self, name):
         self.name = name
-        self.hand = []
+        self.hand = [] # array of cards
 
-    def draw(self):
+    def draw(self, card_deck):
         self.hand.append(card_deck.drawCard())
         return self
-    # def drawCard(self):
-    #     return self.cards.pop()
+
+    def receive_hand(self, card_deck):
+        self.hand.append(card_deck.deal())
+        return self
 
     def showHand(self):
         for card in self.hand:
@@ -73,11 +76,12 @@ card_deck.deal()
 # for card in card_deck.cards:
 #     card.show()
 
-print("Jay")
+print("cards")
 
 jay = Player("Jay")
-jay.shuffle()
-jay.deal()
+jay.draw(card_deck)
 print(jay.showHand())
-jay.draw()
+jay.draw(card_deck)
 print(jay.showHand())
+# jay.receive_hand(card_deck)
+# print(jay.showHand())
